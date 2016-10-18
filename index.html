@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>MBTI Coginitive Functions Calculator</title>
+  <title>MBTI Cognitive Functions Calculator</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -11,6 +11,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.min.js"></script>
   <script>
 
+  function getDesc(cognitiveFunc) {
+    switch(cognitiveFunc) {
+      case "Introverted Sensing":
+      return "Si collects data in the present moment and compares it with past experiences, a process that sometimes evokes the feelings associated with memory, as if the subject were reliving it. Seeking to protect what is familiar, Si draws upon history to form goals and expectations about what will happen in the future.";
+      case "Extraverted Thinking":
+      return "Te organizes and schedules ideas and the environment to ensure the efficient, productive pursuit of objectives. Te seeks logical explanations for actions, events, and conclusions, looking for faulty reasoning and lapses in sequence.";
+      case "Introverted Feeling":
+      return "Fi filters information based on interpretations of worth, forming judgments according to criteria that are often intangible. Fi constantly balances an internal set of values such as harmony and authenticity. Attuned to subtle distinctions, Fi innately senses what is true and what is false in a situation.";
+      case "Extraverted Intuition":
+      return "Ne finds and interprets hidden meanings, using “what if” questions to explore alternatives, allowing multiple possibilities to coexist. This imaginative play weaves together insights and experiences from various sources to form a new whole, which can then become a catalyst to action.";
+      case "Extraverted Sensing":
+      return "Se focuses on the experiences and sensations of the immediate, physical world. With an acute awareness of the present surroundings, it brings relevant facts and details to the forefront and may lead to spontaneous action.";
+      case "Introverted Thinking":
+      return "Ti seeks precision, such as the exact word to express an idea. It notices the minute distinctions that define the essence of things, then analyzes and classifies them. Ti examines all sides of an issue, looking to solve problems while minimizing effort and risk. It uses models to root out logical inconsistency.";
+      case "Extraverted Feeling":
+      return "Fe seeks social connections and creates harmonious interactions through polite, considerate, and appropriate behavior. Fe responds to the explicit (and implicit) wants of others, and may even create an internal conflict between the subject’s own needs and the desire to meet the needs of others.";
+      case "Introverted Intuition":
+      return "Attracted to symbolic actions or devices, Ni synthesizes seeming paradoxes to create the previously unimagined. These realizations come with a certainty that demands action to fulfill a new vision of the future, solutions that may include complex systems or universal truths.";
+    }
+
+  }
 
   $( function() {
     function valueChanged() {
@@ -68,6 +89,11 @@
           }
         }
 
+        $('#dominant-desc').text(getDesc($('#dominant').text()));
+        $('#auxiliary-desc').text(getDesc($('#auxiliary').text()));
+        $('#tertiary-desc').text(getDesc($('#tertiary').text()));
+        $('#inferior-desc').text(getDesc($('#inferior').text()));
+
       }
     };
 
@@ -81,41 +107,46 @@
   </script>
 </head>
 <body>
-  <h1>MBTI Coginitive Functions Calculator</h1>
-  <h2>Parametrable Dichotomies</h2>
-  <table>
-    <tr>
-      <td>Extroversion</td>
-      <td><input id="slider-attitude" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
-      <td>Introversion</td>
-    </tr>
-    <tr>
-      <td>Sensing</td>
-      <td><input id="slider-perceiving" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
-      <td>Intuition</td>
-    </tr>
-    <tr>
-      <td>Thinking</td>
-      <td><input id="slider-judging" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
-      <td>Feeling</td>
-    </tr>
-    <tr>
-      <td>Judging</td>
-      <td><input id="slider-lifestyle" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
-      <td>Perception</td>
-    </tr>
-  </table>
+  <div class="container">
+    <h1><a href="https://en.wikipedia.org/wiki/Myers%E2%80%93Briggs_Type_Indicator">MBTI</a> Cognitive Functions Calculator</h1>
+    <h2>Parametrable Dichotomies</h2>
+    <table>
+      <tr>
+        <td>Extroversion</td>
+        <td><input id="slider-attitude" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+        <td>Introversion</td>
+      </tr>
+      <tr>
+        <td>Sensing</td>
+        <td><input id="slider-perceiving" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+        <td>Intuition</td>
+      </tr>
+      <tr>
+        <td>Thinking</td>
+        <td><input id="slider-judging" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+        <td>Feeling</td>
+      </tr>
+      <tr>
+        <td>Judging</td>
+        <td><input id="slider-lifestyle" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+        <td>Perception</td>
+      </tr>
+    </table>
 
-  <h2>Resulting Cognitive Functions</h2>
-  <div>
-    <div id="impossible">Theoretically impossible! You have to have a preference for each dichotomy. Try moving the sliders...</div>
-    <div id="results">
-      <h3>Dominant: <span id="dominant"/></h3>
-      <h3>Auxiliary: <span id="auxiliary"/></h3>
-      <h3>Tertiary: <span id="tertiary"/></h3>
-      <h3>Inferior: <span id="inferior"/></h3>
+    <h2>Resulting <a href="http://thoughtcatalog.com/heidi-priebe/2015/06/if-youre-confused-about-your-myers-briggs-personality-type-read-this-an-intro-to-cognitive-functions/">Cognitive Functions</a></h2>
+    <div>
+      <div id="impossible">Theoretically impossible! You have to have a preference for each dichotomy. Try moving the sliders above...</div>
+      <div id="results">
+        <h3>Dominant: <span id="dominant"/></h3>
+        <p id="dominant-desc"></p>
+        <h3>Auxiliary: <span id="auxiliary"/></h3>
+        <p id="auxiliary-desc"></p>
+        <h3>Tertiary: <span id="tertiary"/></h3>
+        <p id="tertiary-desc"></p>
+        <h3>Inferior: <span id="inferior"/></h3>
+        <p id="inferior-desc"></p>
+      </div>
     </div>
   </div>
-
 </body>
 </html>
