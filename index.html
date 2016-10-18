@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>MBTI Coginitive Functions Calculator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/css/bootstrap-slider.min.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.min.js"></script>
+  <script>
+
+
+  $( function() {
+    function valueChanged() {
+      $('#impossible').hide();
+      $('#results').hide();
+
+      if(attitude.slider('getValue')==50
+      || perceiving.slider('getValue')==50
+      || judging.slider('getValue')==50
+      || lifestyle.slider('getValue')==50) {
+        $('#impossible').show();
+      } else {
+        $('#results').show();
+
+        var perceivingFunc, judgingFunc, judgingFuncOpp, judgingFuncOpp;
+        if(perceiving.slider('getValue') < 50) {
+          perceivingFunc = 'Sensing';
+          perceivingFuncOpp = 'Intuition';
+        } else {
+          perceivingFunc = 'Intuition';
+          perceivingFuncOpp = 'Sensing';
+        }
+        if(judging.slider('getValue') < 50) {
+          judgingFunc = 'Thinking';
+          judgingFuncOpp = 'Feeling';
+        } else {
+          judgingFunc = 'Feeling';
+          judgingFuncOpp = 'Thinking';
+        }
+
+
+        if(attitude.slider('getValue') < 50) { //Extroverted
+          if(lifestyle.slider('getValue') < 50) { //Judging
+            $('#dominant').text('Extraverted ' + judgingFunc);
+            $('#auxiliary').text('Introverted ' + perceivingFunc);
+            $('#tertiary').text('Extraverted ' + perceivingFuncOpp);
+            $('#inferior').text('Introverted ' + judgingFuncOpp);
+          } else { //Perceiving
+            $('#dominant').text('Extraverted ' + perceivingFunc);
+            $('#auxiliary').text('Introverted ' + judgingFunc);
+            $('#tertiary').text('Extraverted ' + judgingFuncOpp);
+            $('#inferior').text('Introverted ' + perceivingFuncOpp);
+          }
+        } else { //Introverted
+          if(lifestyle.slider('getValue') < 50) { //Judging
+            $('#dominant').text('Introverted ' + perceivingFunc);
+            $('#auxiliary').text('Extraverted ' + judgingFunc);
+            $('#tertiary').text('Introverted ' + judgingFuncOpp);
+            $('#inferior').text('Extraverted ' + perceivingFuncOpp);
+          } else { //Perceiving
+            $('#dominant').text('Introverted ' + judgingFunc);
+            $('#auxiliary').text('Extraverted ' + perceivingFunc);
+            $('#tertiary').text('Introverted ' + perceivingFuncOpp);
+            $('#inferior').text('Extraverted ' + judgingFuncOpp);
+          }
+        }
+
+      }
+    };
+
+    $('#results').hide();
+
+    var attitude = $( "#slider-attitude" ).slider().on('change', valueChanged);
+    var perceiving = $( "#slider-perceiving" ).slider().on('change', valueChanged);
+    var judging = $( "#slider-judging" ).slider().on('change', valueChanged);
+    var lifestyle = $( "#slider-lifestyle" ).slider().on('change', valueChanged);
+  } );
+  </script>
+</head>
+<body>
+  <h1>MBTI Coginitive Functions Calculator</h1>
+  <h2>Parametrable Dichotomies</h2>
+  <table>
+    <tr>
+      <td>Extroversion</td>
+      <td><input id="slider-attitude" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+      <td>Introversion</td>
+    </tr>
+    <tr>
+      <td>Sensing</td>
+      <td><input id="slider-perceiving" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+      <td>Intuition</td>
+    </tr>
+    <tr>
+      <td>Thinking</td>
+      <td><input id="slider-judging" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+      <td>Feeling</td>
+    </tr>
+    <tr>
+      <td>Judging</td>
+      <td><input id="slider-lifestyle" type="text" class="slider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/></td>
+      <td>Perception</td>
+    </tr>
+  </table>
+
+  <h2>Resulting Cognitive Functions</h2>
+  <div>
+    <div id="impossible">Theoretically impossible! You have to have a preference for each dichotomy. Try moving the sliders...</div>
+    <div id="results">
+      <h3>Dominant: <span id="dominant"/></h3>
+      <h3>Auxiliary: <span id="auxiliary"/></h3>
+      <h3>Tertiary: <span id="tertiary"/></h3>
+      <h3>Inferior: <span id="inferior"/></h3>
+    </div>
+  </div>
+
+</body>
+</html>
